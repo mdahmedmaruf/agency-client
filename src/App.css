@@ -257,7 +257,7 @@ span.profile-pic img {
 .form-group.input-file input[type="file"] {
   /* display: none; */
   border: 0;
-  width: 250px;
+  width: 350px;
   color: #009444;
   background-color: #DEFFED;
   padding: 10px 20px 20px;
@@ -288,6 +288,9 @@ span.profile-pic img {
 
 
 @media(max-width: 991px) {
+  .card-title.banner-card-title {
+      font-size: 36px;
+  }
   ul.navbar-nav {
     margin-top: 20px;
     text-align: center;
@@ -309,5 +312,10 @@ span.profile-pic img {
   }
   .client-single-image img {
     width: 50%;
+  }
+}
+@media(max-width: 480px) {
+  .card-title.banner-card-title {
+      font-size: 26px;
   }
 }

@@ -24,7 +24,7 @@ const DashboardSidebar = () => {
                 
                 { isAdming ? (
                 <>
-                    <li>admin</li>
+                    <li>Hello, Admin</li>
                     <li>
                         <Link to="/order-lists">
                             <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-hdd" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

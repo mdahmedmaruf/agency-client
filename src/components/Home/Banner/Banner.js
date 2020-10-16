@@ -2,12 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import frame from '../../../images/Frame.png';
 import NavBar from '../HomeNav/NavBar';
+import { motion } from 'framer-motion';
 
 const Banner = () => {
+    const containerVariants = {
+        hidden: {
+          opacity: 0,
+        },
+        visible: {
+          opacity: 1,
+          transition: { delay: 1.2, duration: 1.2 }
+        }
+      };
     return (
         <section className="banner-section">
             <NavBar/>
-            <div className="container pt-5 mt-3">
+            <motion.div className="container pt-5 mt-3"
+            variants={ containerVariants }
+            initial='hidden'
+            animate='visible'
+            >
                 <div className="row">
                     <div className="col-md-6 content p-3">
                         <div className="card bg-transparent border-0">
@@ -22,7 +36,7 @@ const Banner = () => {
                         <img className="" src={frame} alt="frame"/>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

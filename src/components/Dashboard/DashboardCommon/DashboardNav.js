@@ -15,9 +15,7 @@ const DashboardNav = () => {
                     {loggedInUser.name}<span className="profile-pic"><img src={loggedInUser.photo} alt="login-user-pic"/></span>
                 </p>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link to="/order" className="dropdown-item">Order</Link>
-                    <Link to="/service-lists" className="dropdown-item">Service Lists</Link>
-                    <Link to="/reviews" className="dropdown-item">Reviews</Link>
+                    <Link to="/dashboard" className="dropdown-item">Dashboard</Link>
                     <p onClick={() => setLoggedInUser({})} className="dropdown-item mb-0" role="button">Sign Out</p>
                 </div>
             </li>

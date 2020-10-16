@@ -7,6 +7,7 @@ import MakeAdmin from './components/Dashboard/Admin/MakeAdmin/MakeAdmin';
 import Order from './components/Dashboard/Customer/Order/Order';
 import Reviews from './components/Dashboard/Customer/Reviews/Reviews';
 import ServiceList from './components/Dashboard/Customer/ServiceList/ServiceList';
+import Dashboard from './components/Dashboard/DashboardCommon/Dashboard';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -28,6 +29,9 @@ function App() {
           <Route path="/login">
             <Login/>
           </Route>
+          <PrivateRoute path="/dashboard">
+            <Dashboard/>
+          </PrivateRoute>
           <PrivateRoute path="/order">
             <Order/>
           </PrivateRoute>

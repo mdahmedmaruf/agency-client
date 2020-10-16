@@ -1,33 +1,48 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../../../App';
 
 const OrderForm = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const [order, setOrder] = useState({name: '', email: '', orderCategory:'', details: '', price: '', designPic: ''});
-    const {name, email, orderCategory, details, price, designPic} = order;
+    const [layoutDesign, setLayoutDesign] = useState(null);
+    const [order, setOrder] = useState({});
     
-    const handleInputs = e => {
-        setOrder({...order, [e.target.name]: e.target.value});
+    
+    const handleInputs = (e)=> {
+        const newOrderInfo = { ...order };
+        newOrderInfo[e.target.name] = e.target.value;
+        setOrder(newOrderInfo);
+    }
+
+    const handleDesignSubmit = (e) => {
+        const newDesignFile = e.target.files[0];
+        setLayoutDesign(newDesignFile);
     }
     
     const handleOrderSubmit = (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        console.log(order);
+        formData.append('name', loggedInUser.name);
+        formData.append('email', loggedInUser.email);
+        formData.append('orderCategory', order.orderCategory);
+        formData.append('details', order.details);
+        formData.append('price', order.price);
+        formData.append('layoutDesign', layoutDesign);
         
         fetch('https://sheltered-savannah-44283.herokuapp.com/addNewOrder', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(order)
+            body: formData
         })
-        .then(res => res.json())
         .then(result => {
-            if(result) {
-                //console.log(result)
-            }
+            console.log(result);
+        })
+        .catch(error => {
+            console.error(error);
         });
-        setOrder({name: '', email: '', orderCategory:'', details: '', price: '', designPic: ''})
+        
         setIsSubmit(true);
     };
     if(isSubmit){
@@ -37,21 +52,21 @@ const OrderForm = () => {
     return (
         <form onSubmit={handleOrderSubmit} className="px-4 mx-4">
             <div className="form-group">
-                <input type="text" className="form-control" placeholder="Your name/company name" name="name" value={name} onChange={e => handleInputs(e)}  />
+                <input type="text" className="form-control" placeholder="Your name/company name" name="name" defaultValue={loggedInUser.name}  />
             </div>
             <div className="form-group">
-                <input type="email" className="form-control" placeholder="Your email address" name="email" value={email} onChange={e => handleInputs(e)} />
+                <input type="email" className="form-control" placeholder="Your email address" name="email" defaultValue={loggedInUser.email}/>
             </div>
             <div className="form-group">
-                <input type="text" className="form-control" placeholder="Graphic Design, Web Design etc.." name="orderCategory" value={orderCategory} onChange={e => handleInputs(e)} />
+                <input type="text" className="form-control" placeholder="Graphic Design, Web Design etc.." name="orderCategory" onChange={handleInputs} />
             </div>
             <div className="form-group">
-                <textarea className="form-control" rows="3" placeholder="Project Details" name="details" value={details} onChange={e => handleInputs(e)} ></textarea>
+                <textarea className="form-control" rows="3" placeholder="Project Details" name="details" onChange={handleInputs} ></textarea>
             </div>
             <div className="form-group input-file order">
                 <div className="form-row">
                     <div className="col">
-                        <input type="text" className="form-control" placeholder="Price" name="price" value={price} onChange={e => handleInputs(e)}/>
+                        <input type="text" className="form-control" placeholder="Price" name="price" onChange={handleInputs}/>
                     </div>
                     <div className="col">
                         <label htmlFor="image">
@@ -61,12 +76,12 @@ const OrderForm = () => {
                         </svg> &nbsp;
                         Upload Project File
                         </label>
-                        <input type="file" id="image" className="form-control" placeholder="Upload Project file" name="designPic" value={designPic} onChange={e => handleInputs(e)} />
-                        <img src={designPic} alt=""/>
+                        <input type="file" name="layoutDesign" id="" onChange={handleDesignSubmit}/>
+                        
                     </div>
                 </div>
             </div>
-            <button type="submit" className="btn btn-dark px-5">Send</button>
+            <button type="submit" className="btn btn-dark px-5">Send</button> <button className="btn btn-dark px-5" type="reset">Reset</button>
             {
                 isSubmit &&
                 <p className="mt-3 text-success text-primary">Order Place Successfully!!</p>

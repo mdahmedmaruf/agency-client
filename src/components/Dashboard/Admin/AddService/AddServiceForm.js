@@ -6,7 +6,7 @@ const AddServiceForm = () => {
     const [designFile, setDesignFile] = useState(null);
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const handleInputs = e => {
+    const handleInputs = (e) => {
         const newServiceInfo = { ...addService };
         newServiceInfo[e.target.name] = e.target.value;
         setAddService(newServiceInfo);

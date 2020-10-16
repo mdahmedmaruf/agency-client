@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import customer from '../../../images/customer-1.png';
 import FeedBackDetails from './FeedBackDetails';
 
 const FeedBack = () => {
