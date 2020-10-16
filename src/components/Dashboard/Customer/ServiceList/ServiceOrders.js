@@ -20,13 +20,13 @@ const ServiceOrders = () => {
     return (
         <div className="service-orders">
             <div className="container">
+            {
+                serviceOrders.length > 0 ?
+                <p className="text-center">You have Placed {serviceOrders.length} Order! </p>
+                :
+                <p className="text-center">You haven't Placed any Order Yet!</p>
+            }
                 <div className="row mx-3">
-                {
-                        serviceOrders.length > 0 ?
-                        <p className="text-center">You have Placed {serviceOrders.length} Order! </p>
-                        :
-                        <p className="text-center">You haven't Placed any Order Yet!</p>
-                    }
                     {
                         serviceOrders.map(serviceOrder => <ServiceOrderDetails serviceOrder={serviceOrder} key={serviceOrder.name} />)
                     }
