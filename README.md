@@ -9,7 +9,7 @@ A full stack agency web app where customer can order for services and able to se
 ### Client Side Features
 
 * Customer can place order from service category list.
-* Customer must be login with google for placing order.
+* Customer must be login with email ID for placing order.
 * Customer can check the order status.
 * Customer can leave feedback.
 
